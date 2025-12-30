@@ -1,0 +1,136 @@
+@page "/"
+
+<PageTitle>Prism.Blazor Sample</PageTitle>
+
+<h1>Prism.Blazor Sample</h1>
+
+<p>
+    <strong>Prism.Blazor</strong> is a lightweight, extensible, and Blazor-native component for client-side syntax highlighting.
+</p>
+
+<h2>Code Highlighting Examples</h2>
+
+<h3>C# Code</h3>
+<CodeHighlighter Content="@csharpCode" LanguageDefinition="@(new CSharpLanguageDefinition())" />
+
+<h3>JavaScript Code</h3>
+<CodeHighlighter Content="@javascriptCode" LanguageDefinition="@(new JavaScriptLanguageDefinition())" />
+
+<h3>CSS Code</h3>
+<CodeHighlighter Content="@cssCode" LanguageDefinition="@(new CssLanguageDefinition())" />
+
+<h3>SQL Code</h3>
+<CodeHighlighter Content="@sqlCode" LanguageDefinition="@(new SqlLanguageDefinition())" />
+
+<h3>XML Code</h3>
+<CodeHighlighter Content="@xmlCode" LanguageDefinition="@(new XmlLanguageDefinition())" />
+
+<h2>Custom Theme Example</h2>
+
+<h3>C# with Light Theme</h3>
+<CodeHighlighter Content="@csharpCode"
+                 LanguageDefinition="@(new CSharpLanguageDefinition())"
+                 CustomTheme="@LightThemeForCode" />
+
+<h2>Markdown Rendering</h2>
+
+<h3>Default Theme</h3>
+<MarkdownRenderer MarkdownContent="@markdownText" />
+
+<h3>Light Theme</h3>
+<MarkdownRenderer MarkdownContent="@markdownText" CustomTheme="@LightThemeForMarkdown" />
+
+@code {
+    private string csharpCode = @"public class HelloWorld
+{
+    public void SayHello()
+    {
+        Console.WriteLine(""Hello, World!"");
+    }
+
+    public int Add(int a, int b) => a + b;
+}";
+
+    private string javascriptCode = @"function greet(name) {
+    const message = `Hello, ${name}!`;
+    console.log(message);
+    return message;
+}
+
+const numbers = [1, 2, 3, 4, 5];
+const doubled = numbers.map(n => n * 2);";
+
+    private string cssCode = @".container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+    padding: 20px;
+}
+
+.button {
+    color: white;
+    border-radius: 4px;
+}";
+
+    private string sqlCode = @"SELECT u.Id, u.Name, COUNT(o.Id) AS OrderCount
+FROM Users u
+LEFT JOIN Orders o ON u.Id = o.UserId
+WHERE u.IsActive = 1
+GROUP BY u.Id, u.Name
+ORDER BY OrderCount DESC;";
+
+    private string xmlCode = @"<?xml version=""1.0"" encoding=""UTF-8""?>
+<configuration>
+    <appSettings>
+        <add key=""ApiUrl"" value=""https://api.example.com"" />
+        <add key=""Timeout"" value=""30"" />
+    </appSettings>
+</configuration>";
+
+    private string markdownText = @"# Welcome to Prism.Blazor
+
+This is a **Markdown** rendering example with various features.
+
+## Features
+
+- **Bold text** and *italic text*
+- `Inline code` snippets
+- [Links](https://github.com)
+
+### Code Block
+
+```csharp
+public void Example() => Console.WriteLine(""Hello!"");
+```
+
+> This is a blockquote demonstrating the markdown capabilities.
+
+1. First item
+2. Second item
+3. Third item";
+
+    private Dictionary<string, string> LightThemeForCode = new()
+    {
+        { "background", "#f5f2f0" },
+        { "text", "#383a42" },
+        { "comment", "#a0a1a7" },
+        { "keyword", "#a626a4" },
+        { "string", "#50a14f" },
+        { "number", "#d19a66" },
+        { "type-known", "#c18401" },
+        { "identifier-method", "#4078f2" },
+        { "punctuation", "#383a42" }
+    };
+
+    private Dictionary<string, string> LightThemeForMarkdown = new()
+    {
+        { "text", "#24292e" },
+        { "heading", "#24292e" },
+        { "link", "#0366d6" },
+        { "border", "#e1e4e8" },
+        { "code-background", "#f6f8fa" },
+        { "blockquote-text", "#6a737d" },
+        { "blockquote-border", "#dfe2e5" }
+    };
+}

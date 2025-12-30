@@ -30,19 +30,15 @@
 
     <ItemGroup>
         <!-- Corrected path for README.md -->
-        <None Include="README.md" Pack="true" PackagePath="\"/>
+        <None Include="README.md" Pack="true" PackagePath="\" />
     </ItemGroup>
 
     <ItemGroup>
-        <SupportedPlatform Include="browser"/>
+        <SupportedPlatform Include="browser" />
     </ItemGroup>
 
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="9.0.8" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <Folder Include="wwwroot\" />
     </ItemGroup>
 
 </Project>
